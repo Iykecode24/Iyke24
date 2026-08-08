@@ -1,0 +1,96 @@
+services:
+  # ── PostgreSQL Database ──
+  - type: psqldb
+    name: iyke-postgres
+    plan: starter
+    version: 16
+
+  # ── Redis Cache / Broker ──
+  - type: redis
+    name: iyke-redis
+    plan: free
+    ipAllowList: []
+
+  # ── FastAPI Backend ──
+  - type: web
+    name: iyke-backend
+    env: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    plan: starter
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iyke-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      # Dummy/Placeholder vars that you must fill out in the Render Dashboard
+      - key: APP_SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+
+  # ── Celery Worker (For heavy AI API calls and rendering) ──
+  - type: worker
+    name: iyke-celery-worker
+    env: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    plan: starter
+    dockerCommand: celery -A app.workers.celery_app worker --loglevel=info --concurrency=4
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iyke-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+
+  # ── Celery Beat (For scheduled tasks, e.g., checking runpod status) ──
+  - type: worker
+    name: iyke-celery-beat
+    env: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    dockerCommand: celery -A app.workers.celery_app beat --loglevel=info
+    envVars:
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
