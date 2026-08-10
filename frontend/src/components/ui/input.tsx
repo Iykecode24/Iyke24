@@ -14,10 +14,10 @@ export const Input: React.FC<InputProps> = ({ label, error, helperText, as = 'in
   return (
     <div className="flex flex-col gap-1 w-full">
       {label && <label className="text-sm font-medium text-text-secondary">{label}</label>}
-      {as === 'input' && <input className={`${baseClass} ${className}`} {...(props as any)} />}
-      {as === 'textarea' && <textarea className={`${baseClass} min-h-[100px] ${className}`} {...(props as any)} />}
+      {as === 'input' && <input className={`${baseClass} ${className}`} {...(props as React.InputHTMLAttributes<HTMLInputElement>)} />}
+      {as === 'textarea' && <textarea className={`${baseClass} min-h-[100px] ${className}`} {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)} />}
       {as === 'select' && (
-        <select className={`${baseClass} ${className}`} {...(props as any)}>
+        <select className={`${baseClass} ${className}`} {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}>
           {options?.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       )}

@@ -53,7 +53,7 @@ export default function MovieStudioPage() {
         targetAudience: formData.targetAudience,
         language: formData.language,
         durationSeconds: formData.duration,
-        orientation: formData.orientation as any,
+        orientation: formData.orientation,
         visualStyle: formData.visualStyle,
         voicePreference: formData.voicePreference,
         musicPreference: formData.musicPreference,

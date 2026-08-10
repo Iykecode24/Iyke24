@@ -16,7 +16,7 @@ export const useSSE = (url: string) => {
     };
 
     eventSource.onerror = (err) => {
-      setError(err as any);
+      setError(new Error('EventSource connection failed'));
       eventSource.close();
     };
 
