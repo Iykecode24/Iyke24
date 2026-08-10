@@ -42,19 +42,44 @@ export interface User {
   createdAt: string;
 }
 
+export enum AutomationMode {
+  manual = 'manual',
+  scheduled = 'scheduled',
+  autonomous = 'autonomous'
+}
+
+export enum SceneStatus {
+  draft = 'draft',
+  generating = 'generating',
+  generated = 'generated',
+  approved = 'approved',
+  locked = 'locked',
+  failed = 'failed'
+}
+
 export interface Project {
   id: string;
   userId: string;
   title: string;
   contentType: ContentType;
-  genre: string;
-  targetAudience: string;
-  language: string;
-  durationSeconds: number;
-  resolution: string;
+  genre?: string;
+  targetAudience?: string;
+  language?: string;
+  durationSeconds?: number;
+  resolution?: string;
   orientation: string;
-  visualStyle: string;
+  visualStyle?: string;
+  timePeriod?: string;
+  country?: string;
+  voicePreference?: string;
+  musicPreference?: string;
+  publishingDestination?: string;
   status: ProjectStatus;
+  automationMode: AutomationMode;
+  approvalRequired: boolean;
+  scheduledTime?: string;
+  qualityThreshold: number;
+  automationRules?: any;
   progressPercent: number;
   estimatedCost: number;
   actualCost: number;
@@ -80,12 +105,18 @@ export interface Scene {
   projectId: string;
   scriptId: string;
   orderIndex: number;
-  title?: string;
+  title: string;
   description?: string;
   visualPrompt?: string;
+  audioPrompt?: string;
   dialogue?: string;
   narration?: string;
-  status: ProjectStatus;
+  cameraDirection?: string;
+  shotType?: string;
+  lighting?: string;
+  transition?: string;
+  status: SceneStatus;
+  isLocked: boolean;
   durationSeconds?: number;
   createdAt: string;
   updatedAt: string;
