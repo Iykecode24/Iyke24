@@ -50,7 +50,7 @@ export default function VoiceLibraryPage() {
           </div>
           <div>
             <h1 className="text-3xl font-bold mb-1">Voice Library</h1>
-            <p className="text-text-secondary">Browse, preview, and assign ElevenLabs voices to your characters.</p>
+            <p className="text-text-secondary">Browse, preview, and assign AI voices to your characters.</p>
           </div>
         </div>
         <Button className="gap-2">

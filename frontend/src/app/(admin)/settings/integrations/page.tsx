@@ -12,7 +12,7 @@ export default function IntegrationsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {['OpenAI', 'ElevenLabs', 'RunPod', 'AWS S3'].map(provider => (
+        {['OpenAI', 'RunPod', 'AWS S3'].map(provider => (
           <Card key={provider} className="flex flex-col">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-bold text-lg">{provider}</h3>

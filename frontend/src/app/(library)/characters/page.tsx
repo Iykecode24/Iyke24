@@ -154,7 +154,7 @@ export default function CharactersLibraryPage() {
           />
           <div className="space-y-2">
             <label className="text-sm font-medium text-white flex items-center gap-2">
-              <Mic size={16} className="text-accent-primary" /> ElevenLabs Voice
+              <Mic size={16} className="text-accent-primary" /> Voice Model
             </label>
             <Input 
               as="select"

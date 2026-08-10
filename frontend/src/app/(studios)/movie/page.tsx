@@ -29,7 +29,7 @@ export default function MovieStudioPage() {
     orientation: 'landscape',
     visualStyle: 'cinematic_realism',
     characterCount: 2,
-    voicePreference: 'elevenlabs_premium',
+    voicePreference: 'premium',
     narratorVoiceId: 'auto',
     musicPreference: 'orchestral_epic',
     resolution: '1080p'
@@ -271,13 +271,13 @@ export default function MovieStudioPage() {
                     value={formData.voicePreference}
                     onChange={(e) => handleChange('voicePreference', e.target.value)}
                     options={[
-                      {label: 'ElevenLabs Premium (Ultra-realistic)', value: 'elevenlabs_premium'},
+                      {label: 'Premium AI Voice (Ultra-realistic)', value: 'premium'},
                       {label: 'Standard TTS (Cost-effective)', value: 'standard_tts'},
                       {label: 'No Voices (Music/SFX only)', value: 'none'}
                     ]} 
                   />
 
-                  {formData.voicePreference === 'elevenlabs_premium' && (
+                  {formData.voicePreference === 'premium' && (
                     <Input 
                       as="select" 
                       label="Narrator Voice" 
