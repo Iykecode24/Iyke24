@@ -1,10 +1,10 @@
 import { Project, ContentType, ProjectStatus, User, UserRole, Script, Scene } from '@/types';
 
 const toCamel = (str: string) => str.replace(/([-_][a-z])/ig, ($1) => $1.toUpperCase().replace('-', '').replace('_', ''));
-const isObject = (o: any) => o === Object(o) && !Array.isArray(o) && typeof o !== 'function' && o !== null;
+const isPlainObject = (o: any) => o !== null && typeof o === 'object' && o.constructor === Object;
 
 const keysToCamel = (o: any): any => {
-  if (isObject(o)) {
+  if (isPlainObject(o)) {
     const n: Record<string, any> = {};
     Object.keys(o).forEach((k) => {
       n[toCamel(k)] = keysToCamel(o[k]);
@@ -18,7 +18,7 @@ const keysToCamel = (o: any): any => {
 
 const toSnake = (str: string) => str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 const keysToSnake = (o: any): any => {
-  if (isObject(o)) {
+  if (isPlainObject(o)) {
     const n: Record<string, any> = {};
     Object.keys(o).forEach((k) => {
       n[toSnake(k)] = keysToSnake(o[k]);

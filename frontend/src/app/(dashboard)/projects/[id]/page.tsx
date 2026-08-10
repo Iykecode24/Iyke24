@@ -192,8 +192,10 @@ export default function ProjectDetail() {
           </div>
         </div>
         <div className="w-64 bg-bg-secondary p-3 rounded-xl border border-white/5">
-          <ProgressBar value={isGenerating ? generationProgress : project.progressPercent} label={isGenerating ? "Generating Script..." : "Overall Progress"} size="sm" showLabel />
-        </div>
+          <ProgressBar
+          progress={isGenerating ? generationProgress : project.progressPercent}
+          label={isGenerating ? "Generating Script..." : "Overall Progress"}
+        /></div>
       </div>
 
       {isGenerating && generationProgress < 100 && (

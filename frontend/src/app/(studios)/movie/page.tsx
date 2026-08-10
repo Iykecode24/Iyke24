@@ -87,7 +87,7 @@ export default function MovieStudioPage() {
       </div>
 
       <div className="mb-8">
-        <ProgressBar value={(step / totalSteps) * 100} label={`Step ${step} of ${totalSteps}`} />
+        <ProgressBar progress={(step / totalSteps) * 100} label={`Step ${step} of ${totalSteps}`} />
       </div>
 
       <Card className="min-h-[500px] flex flex-col relative overflow-hidden animate-slide-up">
