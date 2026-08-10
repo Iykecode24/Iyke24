@@ -4,6 +4,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "Iyke Content Studio"
     APP_ENV: str = "development"
     APP_DEBUG: bool = True
+    CORS_ORIGINS: str = "https://iykestudio.com,https://www.iykestudio.com"
     APP_SECRET_KEY: str
     DATABASE_URL: str
     REDIS_URL: str
