@@ -12,7 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function MovieStudioPage() {
   const router = useRouter();
-  const { addToast } = useToast();
+  const { toast } = useToast();
   
   const [step, setStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -60,22 +60,14 @@ export default function MovieStudioPage() {
         resolution: formData.resolution
       });
 
-      addToast({
-        title: 'Project Created',
-        message: 'Your project has been saved. Generating script...',
-        type: 'success'
-      });
+      toast.success('Project Created: Your project has been saved. Generating script...');
 
       // Redirect to the project script view immediately so the user can watch it generate
       router.push(`/projects/${project.id}/script?generating=true`);
       
     } catch (error) {
       console.error('Failed to create project:', error);
-      addToast({
-        title: 'Error',
-        message: 'Failed to create project. Please try again.',
-        type: 'error'
-      });
+      toast.error('Error: Failed to create project. Please try again.');
       setIsGenerating(false);
     }
   };

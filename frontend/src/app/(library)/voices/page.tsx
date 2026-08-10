@@ -18,7 +18,7 @@ const MOCK_VOICES = [
 ];
 
 export default function VoiceLibraryPage() {
-  const { addToast } = useToast();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
   const [playingId, setPlayingId] = useState<string | null>(null);
 
@@ -33,11 +33,7 @@ export default function VoiceLibraryPage() {
   };
 
   const handleAssign = (voiceName: string) => {
-    addToast({
-      title: 'Voice Selected',
-      message: `${voiceName} has been selected. You can now assign it to a character.`,
-      type: 'success'
-    });
+    toast.success(`Voice Selected: ${voiceName} has been selected. You can now assign it to a character.`);
   };
 
   const filteredVoices = MOCK_VOICES.filter(v => 

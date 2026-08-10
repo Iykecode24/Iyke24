@@ -97,7 +97,7 @@ const SceneBreakdown = ({ scenes }: { scenes: Scene[] }) => {
 export default function ProjectDetail() {
   const params = useParams();
   const searchParams = useSearchParams();
-  const { addToast } = useToast();
+  const { toast } = useToast();
   
   const projectId = params?.id as string;
   const isGenerating = searchParams?.get('generating') === 'true';
@@ -124,7 +124,7 @@ export default function ProjectDetail() {
           console.warn("Script/Scenes not found yet");
         }
       } catch (error) {
-        addToast({ title: 'Error', message: 'Failed to load project details', type: 'error' });
+        toast.error('Error: Failed to load project details');
       } finally {
         setLoading(false);
       }
@@ -145,15 +145,15 @@ export default function ProjectDetail() {
       }, 500);
       return () => clearInterval(interval);
     }
-  }, [projectId, isGenerating, addToast]);
+  }, [projectId, isGenerating, toast]);
 
   const handleSaveScript = async (updatedScript: Script) => {
     try {
       const saved = await api.updateScript(updatedScript.id, updatedScript);
       setScript(saved);
-      addToast({ title: 'Saved', message: 'Script saved successfully', type: 'success' });
+      toast.success('Saved: Script saved successfully');
     } catch (e) {
-      addToast({ title: 'Error', message: 'Failed to save script', type: 'error' });
+      toast.error('Error: Failed to save script');
     }
   };
 

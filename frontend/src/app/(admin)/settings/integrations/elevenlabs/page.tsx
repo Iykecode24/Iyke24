@@ -8,7 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { CheckCircle, AlertCircle, Save, Key, Settings, Mic } from 'lucide-react';
 
 export default function ElevenLabsSettingsPage() {
-  const { addToast } = useToast();
+  const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
   const [isTesting, setIsTesting] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'error'>('connected');
@@ -30,7 +30,7 @@ export default function ElevenLabsSettingsPage() {
     setIsSaving(true);
     // Mock save
     await new Promise(r => setTimeout(r, 1000));
-    addToast({ title: 'Settings Saved', message: 'ElevenLabs configuration updated successfully.', type: 'success' });
+    toast.success('Settings Saved: ElevenLabs configuration updated successfully.');
     setIsSaving(false);
   };
 
@@ -39,7 +39,7 @@ export default function ElevenLabsSettingsPage() {
     // Mock test
     await new Promise(r => setTimeout(r, 1500));
     setConnectionStatus('connected');
-    addToast({ title: 'Connection Successful', message: 'Successfully connected to ElevenLabs API.', type: 'success' });
+    toast.success('Connection Successful: Successfully connected to ElevenLabs API.');
     setIsTesting(false);
   };
 
