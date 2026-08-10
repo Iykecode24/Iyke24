@@ -99,7 +99,7 @@ export default function GpuPage() {
             />
           </div>
           <Button variant="secondary">Update Key</Button>
-          <Button variant="outline" className="gap-2">
+          <Button variant="secondary" className="gap-2">
             Test Connection <ExternalLink size={14} />
           </Button>
         </div>
@@ -213,19 +213,19 @@ export default function GpuPage() {
           <h2 className="font-bold text-white text-lg">System Maintenance</h2>
         </div>
         <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Button variant="outline" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-blue/10 hover:text-accent-blue hover:border-accent-blue/50 transition-colors">
+          <Button variant="secondary" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-blue/10 hover:text-accent-blue hover:border-accent-blue/50 transition-colors">
             <Download size={24} />
             <span className="font-medium">Install Core Models</span>
           </Button>
-          <Button variant="outline" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-purple/10 hover:text-accent-purple hover:border-accent-purple/50 transition-colors">
+          <Button variant="secondary" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-purple/10 hover:text-accent-purple hover:border-accent-purple/50 transition-colors">
             <RefreshCw size={24} />
             <span className="font-medium">Update ComfyUI</span>
           </Button>
-          <Button variant="outline" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-yellow/10 hover:text-accent-yellow hover:border-accent-yellow/50 transition-colors">
+          <Button variant="secondary" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-yellow/10 hover:text-accent-yellow hover:border-accent-yellow/50 transition-colors">
             <Eraser size={24} />
             <span className="font-medium">Clean Cache</span>
           </Button>
-          <Button variant="outline" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-red/10 hover:text-accent-red hover:border-accent-red/50 transition-colors">
+          <Button variant="secondary" className="h-auto py-4 flex flex-col items-center gap-2 hover:bg-accent-red/10 hover:text-accent-red hover:border-accent-red/50 transition-colors">
             <Wrench size={24} />
             <span className="font-medium">Repair Installation</span>
           </Button>

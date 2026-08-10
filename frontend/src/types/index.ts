@@ -1,6 +1,35 @@
-export type UserRole = 'admin' | 'creator' | 'editor' | 'viewer';
-export type ContentType = 'movie' | 'cartoon' | 'explainer' | 'news' | 'image_to_video' | 'advertisement';
-export type ProjectStatus = 'draft' | 'planning' | 'scriptwriting' | 'character_creation' | 'storyboarding' | 'voice_generation' | 'scene_generation' | 'lip_sync' | 'editing' | 'upscaling' | 'rendering' | 'uploading' | 'published' | 'failed';
+export enum UserRole {
+  admin = 'admin',
+  creator = 'creator',
+  editor = 'editor',
+  viewer = 'viewer'
+}
+
+export enum ContentType {
+  movie = 'movie',
+  cartoon = 'cartoon',
+  explainer = 'explainer',
+  news = 'news',
+  image_to_video = 'image_to_video',
+  advertisement = 'advertisement'
+}
+
+export enum ProjectStatus {
+  draft = 'draft',
+  planning = 'planning',
+  scriptwriting = 'scriptwriting',
+  character_creation = 'character_creation',
+  storyboarding = 'storyboarding',
+  voice_generation = 'voice_generation',
+  scene_generation = 'scene_generation',
+  lip_sync = 'lip_sync',
+  editing = 'editing',
+  upscaling = 'upscaling',
+  rendering = 'rendering',
+  uploading = 'uploading',
+  published = 'published',
+  failed = 'failed'
+}
 
 export interface User {
   id: string;
