@@ -1,5 +1,35 @@
 import { Project, ContentType, ProjectStatus, User, UserRole, Script, Scene } from '@/types';
 
+const toCamel = (str: string) => str.replace(/([-_][a-z])/ig, ($1) => $1.toUpperCase().replace('-', '').replace('_', ''));
+const isObject = (o: any) => o === Object(o) && !Array.isArray(o) && typeof o !== 'function' && o !== null;
+
+const keysToCamel = (o: any): any => {
+  if (isObject(o)) {
+    const n: Record<string, any> = {};
+    Object.keys(o).forEach((k) => {
+      n[toCamel(k)] = keysToCamel(o[k]);
+    });
+    return n;
+  } else if (Array.isArray(o)) {
+    return o.map((i) => keysToCamel(i));
+  }
+  return o;
+};
+
+const toSnake = (str: string) => str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+const keysToSnake = (o: any): any => {
+  if (isObject(o)) {
+    const n: Record<string, any> = {};
+    Object.keys(o).forEach((k) => {
+      n[toSnake(k)] = keysToSnake(o[k]);
+    });
+    return n;
+  } else if (Array.isArray(o)) {
+    return o.map((i) => keysToSnake(i));
+  }
+  return o;
+};
+
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
     super(message);
@@ -31,6 +61,15 @@ export class ApiClient {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
+    if (options.body && typeof options.body === 'string') {
+      try {
+        const parsed = JSON.parse(options.body);
+        options.body = JSON.stringify(keysToSnake(parsed));
+      } catch (e) {
+        // Not a JSON string
+      }
+    }
+
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       ...options,
       headers,
@@ -53,7 +92,8 @@ export class ApiClient {
       return {} as T;
     }
 
-    return response.json();
+    const data = await response.json();
+    return keysToCamel(data) as T;
   }
 
   // --- Auth ---

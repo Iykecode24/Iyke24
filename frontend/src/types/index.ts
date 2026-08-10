@@ -63,8 +63,33 @@ export interface Project {
   updatedAt: string;
 }
 
-export interface Script {}
-export interface Scene {}
+export interface Script {
+  id: string;
+  projectId: string;
+  title: string;
+  logline?: string;
+  synopsis?: string;
+  fullText?: string;
+  genre?: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface Scene {
+  id: string;
+  projectId: string;
+  scriptId: string;
+  orderIndex: number;
+  title?: string;
+  description?: string;
+  visualPrompt?: string;
+  dialogue?: string;
+  narration?: string;
+  status: ProjectStatus;
+  durationSeconds?: number;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface Character {}
 export interface CharacterReference {}
 export interface Voice {}

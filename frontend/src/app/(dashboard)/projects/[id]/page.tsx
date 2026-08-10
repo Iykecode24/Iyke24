@@ -16,6 +16,12 @@ import { useToast } from '@/hooks/use-toast';
 const ScriptEditor = ({ script, onSave }: { script: Script | null, onSave: (script: Script) => void }) => {
   const [content, setContent] = useState(script?.fullText || '');
 
+  useEffect(() => {
+    if (script?.fullText !== undefined) {
+      setContent(script.fullText);
+    }
+  }, [script?.fullText]);
+
   if (!script) {
     return <div className="text-center p-8 text-text-muted">No script available yet.</div>;
   }
